@@ -2,11 +2,6 @@
     Pathos / Lithos — Main Logic
     Author: Noxis-spec
     Version: 1.2.0
-
-    FLAGS:
-      OreESP, FastMine, InstantMine, AutoMine,
-      MonsterESP, VaseESP, DropESP,
-      Speed, Noclip, Fullbright
 --]]
 
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -40,10 +35,6 @@ local ORE_COLORS = {
     Rock   = Color3.fromRGB(120, 120, 120),
     Dirt   = Color3.fromRGB(130, 100, 70),
 }
-
-local MONSTER_COLOR = Color3.fromRGB(255, 0, 0)
-local VASE_COLOR    = Color3.fromRGB(255, 220, 0)
-local DROP_COLOR    = Color3.fromRGB(0, 255, 100)
 
 local espCache = {}
 
@@ -97,7 +88,7 @@ task.spawn(function()
                 if monsFolder then
                     for _, m in ipairs(monsFolder:GetChildren()) do
                         if m:IsA("Model") then
-                            applyESP(m, MONSTER_COLOR)
+                            applyESP(m, Color3.fromRGB(255, 0, 0))
                         end
                     end
                 end
@@ -115,7 +106,7 @@ task.spawn(function()
                 if vasesFolder then
                     for _, m in ipairs(vasesFolder:GetChildren()) do
                         if m:IsA("Model") then
-                            applyESP(m, VASE_COLOR)
+                            applyESP(m, Color3.fromRGB(255, 220, 0))
                         end
                     end
                 end
@@ -133,7 +124,7 @@ task.spawn(function()
                 if dropFolder then
                     for _, m in ipairs(dropFolder:GetChildren()) do
                         if m:IsA("Model") then
-                            applyESP(m, DROP_COLOR)
+                            applyESP(m, Color3.fromRGB(0, 255, 100))
                         end
                     end
                 end
