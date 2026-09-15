@@ -1,12 +1,27 @@
+--[[
+    Pathos / Lithos — UI Menu
+    Author: Noxis-spec
+    Version: 1.2.0
+
+    TABS:
+      Mining — Ore ESP, Fast Mine, Instant Mine, Auto Mine
+      ESP    — Monster ESP, Vase ESP, Drop ESP
+      Misc   — Speed, Noclip, Fullbright
+--]]
+
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 _G.PathosFlags = _G.PathosFlags or {
-    OreESP     = false,
-    FastMine   = false,
-    AutoMine   = false,
-    Speed      = false,
-    Noclip     = false,
-    Fullbright = false,
+    OreESP      = false,
+    FastMine    = false,
+    InstantMine = false,
+    AutoMine    = false,
+    MonsterESP  = false,
+    VaseESP     = false,
+    DropESP     = false,
+    Speed       = false,
+    Noclip      = false,
+    Fullbright  = false,
 }
 local Flags = _G.PathosFlags
 
@@ -19,12 +34,15 @@ local Window = WindUI:CreateWindow({
     Icon        = "pickaxe",
     Author      = "By Noxis",
     Folder      = "PathosHub",
-    Size        = UDim2.fromOffset(480, 500),
+    Size        = UDim2.fromOffset(500, 520),
     Transparent = true,
     Theme       = "Dark",
     Resizable   = true,
 })
 
+-- ============================================================
+-- MINING TAB
+-- ============================================================
 local MineTab = Window:Tab({ Title = "Mining", Icon = "pickaxe" })
 
 MineTab:Toggle({
@@ -44,6 +62,14 @@ MineTab:Toggle({
 })
 
 MineTab:Toggle({
+    Title    = "Instant Mine",
+    Desc     = "Break any ore in one hit",
+    Icon     = "hammer",
+    Value    = false,
+    Callback = function(state) Flags.InstantMine = state end,
+})
+
+MineTab:Toggle({
     Title    = "Auto Mine",
     Desc     = "Automatically mine nearest ore",
     Icon     = "cog",
@@ -51,6 +77,38 @@ MineTab:Toggle({
     Callback = function(state) Flags.AutoMine = state end,
 })
 
+-- ============================================================
+-- ESP TAB
+-- ============================================================
+local EspTab = Window:Tab({ Title = "ESP", Icon = "scan" })
+
+EspTab:Toggle({
+    Title    = "Monster ESP",
+    Desc     = "Red outline around monsters",
+    Icon     = "skull",
+    Value    = false,
+    Callback = function(state) Flags.MonsterESP = state end,
+})
+
+EspTab:Toggle({
+    Title    = "Vase ESP",
+    Desc     = "Yellow outline around vases",
+    Icon     = "box",
+    Value    = false,
+    Callback = function(state) Flags.VaseESP = state end,
+})
+
+EspTab:Toggle({
+    Title    = "Drop ESP",
+    Desc     = "Green outline around dropped items",
+    Icon     = "package",
+    Value    = false,
+    Callback = function(state) Flags.DropESP = state end,
+})
+
+-- ============================================================
+-- MISC TAB
+-- ============================================================
 local MiscTab = Window:Tab({ Title = "Misc", Icon = "settings-2" })
 
 MiscTab:Toggle({
@@ -87,4 +145,4 @@ MiscTab:Toggle({
     end,
 })
 
-print("[Pathos Hub] UI loaded")
+print("[Pathos Hub] UI loaded — v1.2.0")
