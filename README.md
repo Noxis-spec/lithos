@@ -36,7 +36,7 @@
 
 Copy the code below and paste it into your executor:
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Noxis-spec/pathos-mining-hub/main/loader.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Noxis-spec/lithos/main/loader.lua"))()
 
 The loader will show a loading screen, then open the menu.
 
