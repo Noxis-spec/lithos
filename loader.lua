@@ -1,10 +1,10 @@
 --[[
     ============================================================
-    Lithos — Loader
+    Pathos Hub — Loader
     ============================================================
     Author: Noxis-spec
     GitHub: https://github.com/Noxis-spec/lithos
-    Version: 1.0.0
+    Version: 1.2.0
 --]]
 
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -13,11 +13,11 @@ local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local player  = Players.LocalPlayer
 
-local VERSION = "1.0.0"
+local VERSION = "1.2.0"
 local BASE = "https://cdn.jsdelivr.net/gh/Noxis-spec/lithos@main/"
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "LithosLoader"
+gui.Name = "PathosLoader"
 gui.ResetOnSpawn = false
 gui.IgnoreGuiInset = true
 gui.DisplayOrder = 999
@@ -67,7 +67,7 @@ logoGradient.Parent = logoBg
 local logoText = Instance.new("TextLabel")
 logoText.Size = UDim2.new(1, 0, 1, 0)
 logoText.BackgroundTransparency = 1
-logoText.Text = "L"
+logoText.Text = "P"
 logoText.TextColor3 = Color3.fromRGB(255, 255, 255)
 logoText.TextSize = 38
 logoText.Font = Enum.Font.GothamBlack
@@ -77,7 +77,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 30)
 title.Position = UDim2.new(0, 0, 0, 88)
 title.BackgroundTransparency = 1
-title.Text = "LITHOS HUB"
+title.Text = "PATHOS HUB"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 24
 title.Font = Enum.Font.GothamBlack
@@ -179,7 +179,7 @@ local function fetch(name)
         return game:HttpGet(url)
     end)
     if not ok or not result or #result < 10 then
-        warn("[Lithos Loader] Failed to fetch:", name)
+        warn("[Pathos Loader] Failed to fetch:", name)
         return nil
     end
     return result
@@ -213,14 +213,14 @@ if mainCode then
     local ok, err = pcall(function()
         loadstring(mainCode)()
     end)
-    if not ok then warn("[Lithos Loader] main.lua error:", err) end
+    if not ok then warn("[Pathos Loader] main.lua error:", err) end
 end
 
 if uiCode then
     local ok, err = pcall(function()
         loadstring(uiCode)()
     end)
-    if not ok then warn("[Lithos Loader] ui.lua error:", err) end
+    if not ok then warn("[Pathos Loader] ui.lua error:", err) end
 end
 
-print("[Lithos Loader] done — v" .. VERSION)
+print("[Pathos Loader] done — v" .. VERSION)
