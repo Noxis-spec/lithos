@@ -7,22 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-09-15
+
+### Added
+- **ESP Tab** in the menu with three new toggles:
+  - **Monster ESP** — red outline around monsters (Workspace.Monsters)
+  - **Vase ESP** — yellow outline around vases (Workspace.Vases)
+  - **Drop ESP** — green outline around dropped materials (Workspace.DroppedMaterials)
+- **Instant Mine** toggle — breaks any ore in one hit via ProximityPrompt
+- **Dirt** color added to Ore ESP (brown)
+- Universal ESP system — one function handles all highlights
+
+### Changed
+- Menu reorganized into three tabs: **Mining**, **ESP**, **Misc**
+- `main.lua` rewritten with cleaner ESP logic
+- Loader version bumped to **1.2.0**
+- UI version bumped to **1.2.0**
+
+### Fixed
+- Noclip now properly restores collision when toggled off
+- Fast Mine now also patches tools stored in Backpack
+- Auto Mine no longer targets destroyed ores
+
+---
+
+## [1.1.0] — 2026-09-15
+
+### Added
+- **Instant Mine** — first attempt at one-hit mining
+- **Dirt ESP** color (brown)
+- Faster Auto Mine cycle
+
+### Changed
+- `main.lua` split into cleaner sections
+- Improved Noclip logic
+
+### Fixed
+- Zombie ESP no longer applies to players
+- Reload variables reset when Infinite Ammo is enabled
+
+---
+
 ## [1.0.0] — 2026-09-15
 
 ### Added
 - **Ore ESP** — highlights every ore type through walls with its own color
   (Coal, Copper, Iron, Nickel, Zinc, Slate, Rock)
-- **Fast Mine** — removes pickaxe swing delay by setting `TimeBeforeSwing` to 0
-- **Auto Mine** — automatically triggers the nearest ore's ProximityPrompt
+- **Fast Mine** — removes pickaxe swing delay
+- **Auto Mine** — automatically mines the nearest ore
 - **Speed** — faster movement
 - **Noclip** — walk through walls
-- **Fullbright** — brightens the entire map for visibility in caves
+- **Fullbright** — brightens the entire map
 - **WindUI menu** with two tabs: Mining and Misc
 - **Loader** with animated loading screen and version display
 
 ### Notes
 - Tested on Arceus X Neo
-- Requires executor with `hookmetamethod`, `getrawmetatable`, `getreg` support
+- Requires executor with hookmetamethod, getrawmetatable and getreg support
 - Use on alternate accounts only
 
 ---
@@ -35,7 +76,7 @@ Versions follow `MAJOR.MINOR.PATCH`:
 - **MINOR** — new features, backwards compatible
 - **PATCH** — small bug fixes
 
-Example: `1.1.0`
+Example: `1.2.0`
 
 ## Types of Changes
 
