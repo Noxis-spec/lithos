@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/license-Custom-blue)
 ![Platform](https://img.shields.io/badge/platform-Roblox-red)
 ![Status](https://img.shields.io/badge/status-working-green)
-![Version](https://img.shields.io/badge/version-1.2.0-orange)
+![Version](https://img.shields.io/badge/version-1.3.0-orange)
 
 ---
 
@@ -29,6 +29,10 @@
 - **Speed** — move faster than normal
 - **Noclip** — walk through walls
 - **Fullbright** — brightens the entire map
+
+### Info
+- **Info Tab** — built-in changelog, credits and version info
+  (no need to check GitHub for updates)
 
 ## Ore Colors
 
@@ -63,6 +67,7 @@ Requires executor with hookmetamethod, getrawmetatable and getreg support.
 - **Mining** — Ore ESP, Fast Mine, Instant Mine, Auto Mine
 - **ESP** — Monster ESP, Vase ESP, Drop ESP
 - **Misc** — Speed, Noclip, Fullbright
+- **Info** — version, changelog, credits
 
 ## Credits
 
