@@ -2,11 +2,6 @@
     Pathos / Lithos — UI Menu
     Author: Noxis-spec
     Version: 1.2.0
-
-    TABS:
-      Mining — Ore ESP, Fast Mine, Instant Mine, Auto Mine
-      ESP    — Monster ESP, Vase ESP, Drop ESP
-      Misc   — Speed, Noclip, Fullbright
 --]]
 
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -40,9 +35,6 @@ local Window = WindUI:CreateWindow({
     Resizable   = true,
 })
 
--- ============================================================
--- MINING TAB
--- ============================================================
 local MineTab = Window:Tab({ Title = "Mining", Icon = "pickaxe" })
 
 MineTab:Toggle({
@@ -77,9 +69,6 @@ MineTab:Toggle({
     Callback = function(state) Flags.AutoMine = state end,
 })
 
--- ============================================================
--- ESP TAB
--- ============================================================
 local EspTab = Window:Tab({ Title = "ESP", Icon = "scan" })
 
 EspTab:Toggle({
@@ -106,9 +95,6 @@ EspTab:Toggle({
     Callback = function(state) Flags.DropESP = state end,
 })
 
--- ============================================================
--- MISC TAB
--- ============================================================
 local MiscTab = Window:Tab({ Title = "Misc", Icon = "settings-2" })
 
 MiscTab:Toggle({
