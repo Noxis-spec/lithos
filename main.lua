@@ -1,7 +1,7 @@
 --[[
     Pathos / Lithos — Main Logic
     Author: Noxis-spec
-    Version: 1.2.0
+    Version: 1.3.0
 --]]
 
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -10,6 +10,54 @@ local Players    = game:GetService("Players")
 local Workspace  = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
 local player     = Players.LocalPlayer
+
+-- ============================================================
+-- VERSION INFO (read by ui.lua to show in Info tab)
+-- ============================================================
+_G.PathosVersion = {
+    Version = "1.3.0",
+    Author  = "Noxis-spec",
+    GitHub  = "github.com/Noxis-spec/lithos",
+
+    Changelog = {
+        ["1.3.0"] = {
+            Added   = {
+                "Info tab in menu with version, changelog and credits",
+                "Version info stored in _G for UI access",
+            },
+            Changed = {
+                "Menu now shows credits and changelog inside the game",
+            },
+            Fixed   = {},
+        },
+        ["1.2.0"] = {
+            Added   = {
+                "ESP tab with Monster ESP, Vase ESP, Drop ESP",
+                "Instant Mine toggle",
+                "Dirt color in Ore ESP",
+            },
+            Changed = {
+                "Menu reorganized into Mining / ESP / Misc tabs",
+                "Universal ESP system",
+            },
+            Fixed   = {
+                "Noclip now restores collision when toggled off",
+                "Fast Mine patches tools in Backpack too",
+            },
+        },
+        ["1.0.0"] = {
+            Added   = {
+                "Ore ESP with per-ore colors",
+                "Fast Mine, Auto Mine",
+                "Speed, Noclip, Fullbright",
+                "WindUI menu",
+                "Loader with animated loading screen",
+            },
+            Changed = {},
+            Fixed   = {},
+        },
+    },
+}
 
 _G.PathosFlags = _G.PathosFlags or {
     OreESP      = false,
@@ -84,12 +132,10 @@ task.spawn(function()
     while task.wait(1) do
         if Flags.MonsterESP then
             pcall(function()
-                local monsFolder = Workspace:FindFirstChild("Monsters")
-                if monsFolder then
-                    for _, m in ipairs(monsFolder:GetChildren()) do
-                        if m:IsA("Model") then
-                            applyESP(m, Color3.fromRGB(255, 0, 0))
-                        end
+                local f = Workspace:FindFirstChild("Monsters")
+                if f then
+                    for _, m in ipairs(f:GetChildren()) do
+                        if m:IsA("Model") then applyESP(m, Color3.fromRGB(255, 0, 0)) end
                     end
                 end
             end)
@@ -102,12 +148,10 @@ task.spawn(function()
     while task.wait(1) do
         if Flags.VaseESP then
             pcall(function()
-                local vasesFolder = Workspace:FindFirstChild("Vases")
-                if vasesFolder then
-                    for _, m in ipairs(vasesFolder:GetChildren()) do
-                        if m:IsA("Model") then
-                            applyESP(m, Color3.fromRGB(255, 220, 0))
-                        end
+                local f = Workspace:FindFirstChild("Vases")
+                if f then
+                    for _, m in ipairs(f:GetChildren()) do
+                        if m:IsA("Model") then applyESP(m, Color3.fromRGB(255, 220, 0)) end
                     end
                 end
             end)
@@ -120,12 +164,10 @@ task.spawn(function()
     while task.wait(1) do
         if Flags.DropESP then
             pcall(function()
-                local dropFolder = Workspace:FindFirstChild("DroppedMaterials")
-                if dropFolder then
-                    for _, m in ipairs(dropFolder:GetChildren()) do
-                        if m:IsA("Model") then
-                            applyESP(m, Color3.fromRGB(0, 255, 100))
-                        end
+                local f = Workspace:FindFirstChild("DroppedMaterials")
+                if f then
+                    for _, m in ipairs(f:GetChildren()) do
+                        if m:IsA("Model") then applyESP(m, Color3.fromRGB(0, 255, 100)) end
                     end
                 end
             end)
@@ -155,9 +197,9 @@ task.spawn(function()
             local tool = char:FindFirstChildOfClass("Tool")
             if tool then patchFastMine(tool) end
         end
-        local backpack = player:FindFirstChild("Backpack")
-        if backpack then
-            for _, t in ipairs(backpack:GetChildren()) do
+        local bp = player:FindFirstChild("Backpack")
+        if bp then
+            for _, t in ipairs(bp:GetChildren()) do
                 if t:IsA("Tool") then patchFastMine(t) end
             end
         end
@@ -173,10 +215,10 @@ task.spawn(function()
         if not root then continue end
 
         pcall(function()
-            local oresFolder = Workspace:FindFirstChild("Ores")
-            if not oresFolder then return end
+            local ores = Workspace:FindFirstChild("Ores")
+            if not ores then return end
 
-            for _, model in ipairs(oresFolder:GetChildren()) do
+            for _, model in ipairs(ores:GetChildren()) do
                 local part = model:FindFirstChildWhichIsA("BasePart")
                 if part and part.Parent then
                     local dist = (part.Position - root.Position).Magnitude
@@ -207,22 +249,19 @@ task.spawn(function()
         if not root then continue end
 
         pcall(function()
-            local oresFolder = Workspace:FindFirstChild("Ores")
-            if not oresFolder then return end
+            local ores = Workspace:FindFirstChild("Ores")
+            if not ores then return end
 
-            local closest, closestDist = nil, math.huge
-            for _, model in ipairs(oresFolder:GetChildren()) do
+            local closest, dist = nil, math.huge
+            for _, model in ipairs(ores:GetChildren()) do
                 local part = model:FindFirstChildWhichIsA("BasePart")
                 if part and part.Parent then
-                    local dist = (part.Position - root.Position).Magnitude
-                    if dist < closestDist then
-                        closestDist = dist
-                        closest = part
-                    end
+                    local d = (part.Position - root.Position).Magnitude
+                    if d < dist then dist = d; closest = part end
                 end
             end
 
-            if closest and closestDist < 15 then
+            if closest and dist < 15 then
                 local prompt = closest:FindFirstChildOfClass("ProximityPrompt")
                 if not prompt and closest.Parent then
                     prompt = closest.Parent:FindFirstChildOfClass("ProximityPrompt")
@@ -242,22 +281,14 @@ RunService.RenderStepped:Connect(function()
     if not char then return end
     local hum = char:FindFirstChildOfClass("Humanoid")
     if hum then
-        if Flags.Speed then
-            hum.WalkSpeed = 60
-        else
-            hum.WalkSpeed = 16
-        end
+        if Flags.Speed then hum.WalkSpeed = 60 else hum.WalkSpeed = 16 end
     end
 
     for _, p in ipairs(char:GetDescendants()) do
         if p:IsA("BasePart") then
-            if Flags.Noclip then
-                p.CanCollide = false
-            else
-                p.CanCollide = true
-            end
+            if Flags.Noclip then p.CanCollide = false else p.CanCollide = true end
         end
     end
 end)
 
-print("[Pathos Main] loaded — v1.2.0")
+print("[Pathos Main] loaded — v1.3.0")
