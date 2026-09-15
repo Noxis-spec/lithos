@@ -40,8 +40,8 @@ gradient.Rotation = 45
 gradient.Parent = bg
 
 local container = Instance.new("Frame")
-container.Size = UDim2.new(0, 360, 0, 320)
-container.Position = UDim2.new(0.5, -180, 0.5, -160)
+container.Size = UDim2.new(0, 360, 0, 340)
+container.Position = UDim2.new(0.5, -180, 0.5, -170)
 container.BackgroundTransparency = 1
 container.Parent = bg
 
@@ -134,16 +134,29 @@ status.TextSize = 13
 status.Font = Enum.Font.Gotham
 status.Parent = container
 
+-- Version in bottom-right corner (bigger, with hub name)
 local versionLabel = Instance.new("TextLabel")
-versionLabel.Size = UDim2.new(0, 200, 0, 20)
-versionLabel.Position = UDim2.new(1, -210, 1, -30)
+versionLabel.Size = UDim2.new(0, 300, 0, 24)
+versionLabel.Position = UDim2.new(1, -310, 1, -40)
 versionLabel.BackgroundTransparency = 1
-versionLabel.Text = "v" .. VERSION
-versionLabel.TextColor3 = Color3.fromRGB(120, 120, 120)
-versionLabel.TextSize = 12
-versionLabel.Font = Enum.Font.Gotham
+versionLabel.Text = "PATHOS HUB v" .. VERSION
+versionLabel.TextColor3 = Color3.fromRGB(200, 150, 80)
+versionLabel.TextSize = 14
+versionLabel.Font = Enum.Font.GothamBold
 versionLabel.TextXAlignment = Enum.TextXAlignment.Right
 versionLabel.Parent = bg
+
+-- Credits in bottom-right (below version)
+local creditsLabel = Instance.new("TextLabel")
+creditsLabel.Size = UDim2.new(0, 300, 0, 18)
+creditsLabel.Position = UDim2.new(1, -310, 1, -22)
+creditsLabel.BackgroundTransparency = 1
+creditsLabel.Text = "Created by Noxis"
+creditsLabel.TextColor3 = Color3.fromRGB(100, 100, 100)
+creditsLabel.TextSize = 12
+creditsLabel.Font = Enum.Font.Gotham
+creditsLabel.TextXAlignment = Enum.TextXAlignment.Right
+creditsLabel.Parent = bg
 
 TweenService:Create(bg, TweenInfo.new(0.4), {
     BackgroundTransparency = 0
