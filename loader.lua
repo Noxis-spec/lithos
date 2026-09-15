@@ -13,7 +13,7 @@ local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local player  = Players.LocalPlayer
 
-local VERSION = "1.2.0"
+local VERSION = "1.3.0"
 local BASE = "https://cdn.jsdelivr.net/gh/Noxis-spec/lithos@main/"
 
 local gui = Instance.new("ScreenGui")
