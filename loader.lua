@@ -1,24 +1,10 @@
 --[[
     ============================================================
-    Pathos Hub — Loader
+    Lithos — Loader
     ============================================================
     Author: Noxis-spec
-    GitHub: https://github.com/Noxis-spec/pathos-mining-hub
+    GitHub: https://github.com/Noxis-spec/lithos
     Version: 1.0.0
-
-    WHAT THIS FILE DOES:
-      1. Shows an animated loading screen
-      2. Fetches main.lua (mining logic)
-      3. Fetches ui.lua (WindUI menu)
-      4. Runs both files in order
-
-    USAGE:
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/Noxis-spec/pathos-mining-hub/main/loader.lua"))()
-
-    WARNING:
-      Using this script violates Roblox Terms of Service.
-      Use on alternate accounts only.
-    ============================================================
 --]]
 
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -28,19 +14,15 @@ local TweenService = game:GetService("TweenService")
 local player  = Players.LocalPlayer
 
 local VERSION = "1.0.0"
-local BASE = "https://raw.githubusercontent.com/Noxis-spec/pathos-mining-hub/main/"
+local BASE = "https://cdn.jsdelivr.net/gh/Noxis-spec/lithos@main/"
 
--- ============================================================
--- LOADING SCREEN
--- ============================================================
 local gui = Instance.new("ScreenGui")
-gui.Name = "PathosLoader"
+gui.Name = "LithosLoader"
 gui.ResetOnSpawn = false
 gui.IgnoreGuiInset = true
 gui.DisplayOrder = 999
 gui.Parent = player:WaitForChild("PlayerGui")
 
--- Background
 local bg = Instance.new("Frame")
 bg.Size = UDim2.new(1, 0, 1, 0)
 bg.BackgroundColor3 = Color3.fromRGB(8, 6, 10)
@@ -48,7 +30,6 @@ bg.BackgroundTransparency = 1
 bg.BorderSizePixel = 0
 bg.Parent = gui
 
--- Gradient overlay
 local gradient = Instance.new("UIGradient")
 gradient.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 30, 0)),
@@ -58,14 +39,12 @@ gradient.Color = ColorSequence.new({
 gradient.Rotation = 45
 gradient.Parent = bg
 
--- Container
 local container = Instance.new("Frame")
 container.Size = UDim2.new(0, 360, 0, 320)
 container.Position = UDim2.new(0.5, -180, 0.5, -160)
 container.BackgroundTransparency = 1
 container.Parent = bg
 
--- Logo circle
 local logoBg = Instance.new("Frame")
 logoBg.Size = UDim2.new(0, 70, 0, 70)
 logoBg.Position = UDim2.new(0.5, -35, 0, 0)
@@ -88,24 +67,22 @@ logoGradient.Parent = logoBg
 local logoText = Instance.new("TextLabel")
 logoText.Size = UDim2.new(1, 0, 1, 0)
 logoText.BackgroundTransparency = 1
-logoText.Text = "P"
+logoText.Text = "L"
 logoText.TextColor3 = Color3.fromRGB(255, 255, 255)
 logoText.TextSize = 38
 logoText.Font = Enum.Font.GothamBlack
 logoText.Parent = logoBg
 
--- Title
 local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 30)
 title.Position = UDim2.new(0, 0, 0, 88)
 title.BackgroundTransparency = 1
-title.Text = "PATHOS HUB"
+title.Text = "LITHOS HUB"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 24
 title.Font = Enum.Font.GothamBlack
 title.Parent = container
 
--- Subtitle
 local subtitle = Instance.new("TextLabel")
 subtitle.Size = UDim2.new(1, 0, 0, 16)
 subtitle.Position = UDim2.new(0, 0, 0, 118)
@@ -116,7 +93,6 @@ subtitle.TextSize = 13
 subtitle.Font = Enum.Font.Gotham
 subtitle.Parent = container
 
--- Progress bar background
 local barBg = Instance.new("Frame")
 barBg.Size = UDim2.new(0, 280, 0, 8)
 barBg.Position = UDim2.new(0.5, -140, 0, 170)
@@ -128,7 +104,6 @@ local barCorner = Instance.new("UICorner")
 barCorner.CornerRadius = UDim.new(1, 0)
 barCorner.Parent = barBg
 
--- Progress bar fill
 local barFill = Instance.new("Frame")
 barFill.Size = UDim2.new(0, 0, 1, 0)
 barFill.BackgroundColor3 = Color3.fromRGB(255, 180, 50)
@@ -139,14 +114,6 @@ local fillCorner = Instance.new("UICorner")
 fillCorner.CornerRadius = UDim.new(1, 0)
 fillCorner.Parent = barFill
 
-local fillGradient = Instance.new("UIGradient")
-fillGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 220, 100)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 120, 0)),
-})
-fillGradient.Parent = barFill
-
--- Percent label
 local percentText = Instance.new("TextLabel")
 percentText.Size = UDim2.new(1, 0, 0, 20)
 percentText.Position = UDim2.new(0, 0, 0, 190)
@@ -157,7 +124,6 @@ percentText.TextSize = 16
 percentText.Font = Enum.Font.GothamBold
 percentText.Parent = container
 
--- Status text
 local status = Instance.new("TextLabel")
 status.Size = UDim2.new(1, 0, 0, 18)
 status.Position = UDim2.new(0, 0, 0, 220)
@@ -168,7 +134,6 @@ status.TextSize = 13
 status.Font = Enum.Font.Gotham
 status.Parent = container
 
--- Version in bottom-right corner
 local versionLabel = Instance.new("TextLabel")
 versionLabel.Size = UDim2.new(0, 200, 0, 20)
 versionLabel.Position = UDim2.new(1, -210, 1, -30)
@@ -180,14 +145,10 @@ versionLabel.Font = Enum.Font.Gotham
 versionLabel.TextXAlignment = Enum.TextXAlignment.Right
 versionLabel.Parent = bg
 
--- ============================================================
--- ANIMATIONS
--- ============================================================
 TweenService:Create(bg, TweenInfo.new(0.4), {
     BackgroundTransparency = 0
 }):Play()
 
--- Pulse logo
 task.spawn(function()
     while gui.Parent do
         local t1 = TweenService:Create(logoBg, TweenInfo.new(0.9, Enum.EasingStyle.Sine), {
@@ -205,7 +166,6 @@ task.spawn(function()
     end
 end)
 
--- Progress update
 local function setProgress(t)
     TweenService:Create(barFill, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
         Size = UDim2.new(t, 0, 1, 0)
@@ -213,24 +173,18 @@ local function setProgress(t)
     percentText.Text = math.floor(t * 100) .. "%"
 end
 
--- ============================================================
--- FILE FETCHER
--- ============================================================
 local function fetch(name)
     local url = BASE .. name
     local ok, result = pcall(function()
         return game:HttpGet(url)
     end)
     if not ok or not result or #result < 10 then
-        warn("[Pathos Loader] Failed to fetch:", name)
+        warn("[Lithos Loader] Failed to fetch:", name)
         return nil
     end
     return result
 end
 
--- ============================================================
--- LOAD SEQUENCE
--- ============================================================
 task.wait(0.4)
 
 status.Text = "Fetching main.lua..."
@@ -247,7 +201,6 @@ status.Text = "Launching..."
 setProgress(1)
 task.wait(0.6)
 
--- Fade out
 local fadeOut = TweenService:Create(bg, TweenInfo.new(0.4), {
     BackgroundTransparency = 1
 })
@@ -260,14 +213,14 @@ if mainCode then
     local ok, err = pcall(function()
         loadstring(mainCode)()
     end)
-    if not ok then warn("[Pathos Loader] main.lua error:", err) end
+    if not ok then warn("[Lithos Loader] main.lua error:", err) end
 end
 
 if uiCode then
     local ok, err = pcall(function()
         loadstring(uiCode)()
     end)
-    if not ok then warn("[Pathos Loader] ui.lua error:", err) end
+    if not ok then warn("[Lithos Loader] ui.lua error:", err) end
 end
 
-print("[Pathos Loader] done — v" .. VERSION)
+print("[Lithos Loader] done — v" .. VERSION)
