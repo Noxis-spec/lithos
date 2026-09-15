@@ -8,17 +8,27 @@
 ![License](https://img.shields.io/badge/license-Custom-blue)
 ![Platform](https://img.shields.io/badge/platform-Roblox-red)
 ![Status](https://img.shields.io/badge/status-working-green)
+![Version](https://img.shields.io/badge/version-1.2.0-orange)
 
 ---
 
 ## Features
 
+### Mining
 - **Ore ESP** — highlights every ore type through walls with its own color
 - **Fast Mine** — removes pickaxe swing delay
+- **Instant Mine** — breaks any ore in one hit
 - **Auto Mine** — automatically mines the nearest ore
+
+### ESP
+- **Monster ESP** — red outline around monsters
+- **Vase ESP** — yellow outline around vases
+- **Drop ESP** — green outline around dropped items
+
+### Misc
 - **Speed** — move faster than normal
 - **Noclip** — walk through walls
-- **Fullbright** — brightens the entire map for visibility in caves
+- **Fullbright** — brightens the entire map
 
 ## Ore Colors
 
@@ -31,6 +41,7 @@
 | Zinc | Blue-Gray |
 | Slate | Dark Blue |
 | Rock | Gray |
+| Dirt | Brown |
 
 ## Usage
 
@@ -49,7 +60,8 @@ Requires executor with hookmetamethod, getrawmetatable and getreg support.
 
 ## Menu Tabs
 
-- **Mining** — Ore ESP, Fast Mine, Auto Mine
+- **Mining** — Ore ESP, Fast Mine, Instant Mine, Auto Mine
+- **ESP** — Monster ESP, Vase ESP, Drop ESP
 - **Misc** — Speed, Noclip, Fullbright
 
 ## Credits
